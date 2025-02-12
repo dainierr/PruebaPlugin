@@ -1,0 +1,20 @@
+{
+    "eventype":"Tipo de vento",
+    "capacity":"Capacidad",
+    "budget":"Presupuesto",
+    "retirement":"Retiro",
+    "baptism":"Bautizmo",
+    "worship":"Culto",
+    "members":"Miembros",
+    "events":"Eventos",
+    "test":"Test",
+    "gender":"Genero",
+    "man":"Hombre",
+    "woman":"Mujer",
+    "others":"Otros",
+    "important-date":"Fechas importantes",
+    "personal-data":"Datos personales",
+    "data":"Datos",
+    "ministry":"Ministerio",
+    "responsible":"Responsable"
+}   
