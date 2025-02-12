@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Document   : clientes.xml
+    Author     : Carlos Garcia Gomez
+    Description:
+        Structure for the clientes table.
+
+        
+ tipo de evento (culto retiro bautizmo)
+ capacidad integer
+ ubicacion text 
+ presupuesto float  (double precision)  number como witget number    atrib decimal      witget  money atrib decimal
+
+pantalla nueva usuario 
+-->
+<table>
+    <column>
+        <name>id</name>
+        <type>serial</type>
+        <null>NO</null>
+    </column>
+    <column>
+        <name>name</name>
+        <type>character varying(100)</type>
+        <null>NO</null>
+    </column>
+    <column>
+        <name>eventype</name>
+        <type>integer</type>
+        <default>1</default>  
+    </column>
+       <column>
+        <name>capacidad</name>
+        <type>integer</type>  
+        <default>1</default>         
+    </column>
+    <column>
+        <name>ubicacion</name>
+        <type>text</type>        
+    </column>
+    <column>
+        <name>presupuesto</name>
+        <type>double precision</type>  
+        <default>0</default>
+    </column>
+   
+   <!--constraint-->
+    <constraint>
+        <name>events_pkey</name>
+        <type>PRIMARY KEY (id)</type>
+    </constraint>
+
+</table>
