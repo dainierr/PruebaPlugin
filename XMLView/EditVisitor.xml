@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * This file is part of FacturaScripts
+ * Copyright (C) 2017-2022 Carlos Garcia Gomez <carlos@facturascripts.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @author Artex Trading sa     <jcuello@artextrading.com>
+ * @author Carlos García Gómez  <carlos@facturascripts.com>
+-->
+<view>
+    <columns>
+        <group name="defaultministry" numcolumns="12" title="data" icon="fa-solid fa-card">
+            <column name="code" order="100" numcolumns="3">
+                <widget type="text" fieldname="id" readonly="true"/>
+            </column>
+            <column name="name" order="110" numcolumns="3">
+                <widget type="text" fieldname="name" />
+            </column>
+            <column name="dischargedate" order="120" numcolumns="3">
+                <widget type="date" fieldname="dischargedate" icon="fa-solid fa-calendar"/>
+            </column>
+            <column name="member" order="130" numcolumns="3">
+                <widget type="select" fieldname="idmember" required="true">
+                    <values source="members" fieldcode="id" fieldtitle="name" />
+                </widget>
+            </column>
+
+        </group>
+        <group name="notes" numcolumns="12">
+            <column name="notes" order="120" numcolumns="12">
+                <widget type="textarea" fieldname="comments" rows="5"/>
+            </column>
+        </group>    
+
+    </columns>
+
+</view>
