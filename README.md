@@ -8,4 +8,4 @@ Esto es un plugin de prueba para aprendizaje
 
 
 ## Nombre de carpeta
-Como con todos los plugins, la carpeta se debe llamar igual que el plugin. En este caso **PruebaPlugin**.
+Como con todos los plugins, la carpeta se debe llamar igual que el plugin. En este caso **PruebaPlugin****.
