@@ -36,8 +36,8 @@ class EditMinistry extends EditController
     {
 
         $pagedata = parent::getPageData();
-        $pagedata['title'] = 'ministries';
-        $pagedata['icon'] = 'fa-solid fa-masks-theater';
+        $pagedata['title'] = 'ministry';
+        $pagedata['icon'] = 'fa-solid fa-hands-holding';
         $pagedata['menu'] = 'test';
 
         return $pagedata;

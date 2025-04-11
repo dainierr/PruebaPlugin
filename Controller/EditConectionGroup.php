@@ -16,16 +16,16 @@ use FacturaScripts\Core\Lib\ExtendedController\EditController;
  *
  * @author Jose Antonio Cuello  <yopli2000@gmail.com>
  */
-class EditEvent extends EditController
+class EditConectionGroup extends EditController
 {
-    private const VIEW_MEMBER = "EditEventMember";
+    private const VIEW_CONECTION_GROUP_MEMBER = "EditConectionGroupMember";
 
     /**
      * Returns the model name
      */
     public function getModelClassName(): string
     {
-        return 'Event';
+        return 'ConectionGroup';
     }
 
     /**
@@ -37,8 +37,8 @@ class EditEvent extends EditController
     {
 
         $pagedata = parent::getPageData();
-        $pagedata['title'] = 'events';
-        $pagedata['icon'] = 'fa-solid fa-masks-theater';
+        $pagedata['title'] = 'conectiongroup';
+        $pagedata['icon'] = 'fa-solid fa-people-group';
         $pagedata['menu'] = 'test';
         $pagedata['ordernum'] = 0;
         $pagedata['showonmenu'] = false;
@@ -49,8 +49,8 @@ class EditEvent extends EditController
     protected function createViews()
     {
         parent::createViews();
-        $view = $this->addEditListView(self::VIEW_MEMBER, 'EventMember', 'members');
-        $view->disableColumn('events');
+        $view = $this->addEditListView(self::VIEW_CONECTION_GROUP_MEMBER, 'ConectionGroupMember', 'members');
+        $view->disableColumn('conectiongroups');
 
         $this->setTabsPosition('bottom');
     }
@@ -58,11 +58,11 @@ class EditEvent extends EditController
     protected function loadData($viewName, $view)
     {
         switch ($viewName) {
-            case self::VIEW_MEMBER:
+            case self::VIEW_CONECTION_GROUP_MEMBER:
                 $mvn = $this->getMainViewName();
-                $idevent = $this->getViewModelValue($mvn, 'id');
+                $idconectiongroup = $this->getViewModelValue($mvn, 'id');
 
-                $where = [ new DataBaseWhere('idevent', $idevent)];
+                $where = [ new DataBaseWhere('idconectiongroup', $idconectiongroup)];
                 $view->loadData('', $where);
                 break;
                 
@@ -70,5 +70,7 @@ class EditEvent extends EditController
                 parent::loadData($viewName, $view);
                 break;
         }
+       
     }
+
 }

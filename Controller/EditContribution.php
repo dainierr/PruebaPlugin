@@ -8,24 +8,26 @@
  */
 namespace FacturaScripts\Plugins\PruebaPlugin\Controller;
 
+use FacturaScripts\Dinamic\Model\Contribution;
 use FacturaScripts\Core\Base\DataBase\DataBaseWhere;
 use FacturaScripts\Core\Lib\ExtendedController\EditController;
+use FacturaScripts\Core\Tools;
 
 /**
  * Controller to edit the items in the ForecastSupplier model
  *
  * @author Jose Antonio Cuello  <yopli2000@gmail.com>
  */
-class EditEvent extends EditController
+class EditContribution extends EditController
 {
-    private const VIEW_MEMBER = "EditEventMember";
+    private const VIEW_CONTRIBUTION = "EditContribution";
 
     /**
      * Returns the model name
      */
     public function getModelClassName(): string
     {
-        return 'Event';
+        return 'Contribution';
     }
 
     /**
@@ -35,10 +37,10 @@ class EditEvent extends EditController
      */
     public function getPageData(): array
     {
-
+        
         $pagedata = parent::getPageData();
-        $pagedata['title'] = 'events';
-        $pagedata['icon'] = 'fa-solid fa-masks-theater';
+        $pagedata['title'] = 'contribution';
+        $pagedata['icon'] = 'fa-solid fa-sack-dollar';
         $pagedata['menu'] = 'test';
         $pagedata['ordernum'] = 0;
         $pagedata['showonmenu'] = false;
@@ -46,29 +48,5 @@ class EditEvent extends EditController
         return $pagedata;
     }
 
-    protected function createViews()
-    {
-        parent::createViews();
-        $view = $this->addEditListView(self::VIEW_MEMBER, 'EventMember', 'members');
-        $view->disableColumn('events');
 
-        $this->setTabsPosition('bottom');
-    }
-
-    protected function loadData($viewName, $view)
-    {
-        switch ($viewName) {
-            case self::VIEW_MEMBER:
-                $mvn = $this->getMainViewName();
-                $idevent = $this->getViewModelValue($mvn, 'id');
-
-                $where = [ new DataBaseWhere('idevent', $idevent)];
-                $view->loadData('', $where);
-                break;
-                
-            default: 
-                parent::loadData($viewName, $view);
-                break;
-        }
-    }
 }
