@@ -38,6 +38,10 @@
         <type>date</type>
     </column>
     <column>
+        <name>baptismsite</name>
+        <type>character varying(100)</type>    
+    </column>
+    <column>
         <name>notes</name>
         <type>text</type>
     </column>
@@ -58,8 +62,15 @@
     </column>
     <column>
         <name>idministry</name>
-        <type>integer</type>
-        
+        <type>integer</type>        
+    </column>
+    <column>
+        <name>tipoidfiscal</name>
+        <type>character varying(25)</type>
+    </column>
+    <column>
+        <name>cifnif</name>
+        <type>character varying(30)</type>
     </column>
 
    

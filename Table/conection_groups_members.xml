@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Document   : clientes.xml
+    Author     : Carlos Garcia Gomez
+    Description:
+        Structure for the clientes table.
+-->
+<table>
+    <column>
+        <name>id</name>
+        <type>serial</type>
+        <null>NO</null>
+    </column>
+    <column>
+        <name>idconectiongroup</name>
+        <type>integer</type>
+        <null>NO</null>
+    </column>
+    <column>
+        <name>idmember</name>
+        <type>integer</type>
+        <null>NO</null>
+    </column>
+
+   
+   <!--constraint-->
+    <constraint>
+        <name>conection_group_members_pkey</name>
+        <type>PRIMARY KEY (id)</type>
+    </constraint>
+    <constraint>
+        <name>ca_conection_groups_members_conection_group</name>
+        <type>FOREIGN KEY (idconectiongroup) REFERENCES conection_groups (id) ON DELETE CASCADE ON UPDATE CASCADE</type>
+    </constraint>
+    <constraint>
+        <name>ca_conection_groups_members_members</name>
+        <type>FOREIGN KEY (idmember) REFERENCES members (id) ON DELETE RESTRICT ON UPDATE CASCADE</type>
+    </constraint>
+    <constraint>
+        <name>uniq_conection_groups_members_idx1</name>
+        <type>UNIQUE (idmember, idconectiongroup)</type>
+    </constraint>
+</table>

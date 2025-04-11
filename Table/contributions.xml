@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Document   : clientes.xml
+    Author     : Carlos Garcia Gomez
+    Description:
+        Structure for the clientes table.
+
+        
+ tipo de evento (culto retiro bautizmo)
+ capacidad integer
+ ubicacion text 
+ presupuesto float  (double precision)  number como witget number    atrib decimal      witget  money atrib decimal
+
+pantalla nueva usuario 
+-->
+<table>
+    <column>
+        <name>id</name>
+        <type>serial</type>
+        <null>NO</null>
+    </column>
+
+    
+    <column>
+        <name>registration</name>
+        <type>date</type>
+        <null>NO</null>
+    </column>
+       <column>
+        <name>amount</name>
+        <type>double precision</type>    
+        <default>0</default>     
+        <null>NO</null>    
+    </column>
+    <column>
+        <name>tithetype</name>
+        <type>integer</type>   
+        <null>NO</null>     
+    </column>
+    <column>
+        <name>paymentmethod</name>
+        <type>integer</type>    
+        <null>NO</null>      
+    </column>
+    <column>
+        <name>idmember</name>
+        <type>integer</type>       
+    </column>
+    <column>
+        <name>tithename</name>
+        <type>character varying(100)</type>       
+    </column>
+    <column>
+        <name>nick</name>
+        <type>character varying(50)</type>
+        <null>NO</null>
+    </column>
+   
+   <!--constraint-->
+    <constraint>
+        <name>events_pkey</name>
+        <type>PRIMARY KEY (id)</type>
+    </constraint>
+    <constraint>
+        <name>ca_contributions_members</name>
+        <type>FOREIGN KEY (idmember) REFERENCES members (id) ON DELETE SET NULL ON UPDATE CASCADE</type>
+    </constraint>
+    <constraint>
+        <name>ca_contributions_users</name>
+        <type>FOREIGN KEY (nick) REFERENCES users (nick) ON DELETE RESTRICT ON UPDATE CASCADE</type>
+    </constraint>
+
+</table>
