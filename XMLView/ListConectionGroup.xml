@@ -28,14 +28,12 @@
         <column name="name" order="110">
             <widget type="text" fieldname="name"/>
         </column>
-        <column name="comments" order="120">
-            <widget type="text" fieldname="comments" />
+        <column name="type" order="120">
+            <widget type="text" fieldname="membernumbers" />
         </column> 
-        <column name="responsible" order="130">
-            <widget type="autocomplete" fieldname="idmember" required="true">
-                     <values source="members" fieldcode="id" fieldtitle="name" />
-                </widget>
-        </column>
+        <column name="capacity" order="130">
+            <widget type="text" fieldname="weekdays" />
+        </column> 
 
     </columns>
 </view>

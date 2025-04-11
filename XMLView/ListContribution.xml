@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * This file is part of FacturaScripts
+ * Copyright (C) 2017-2022 Carlos Garcia Gomez <carlos@facturascripts.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @author Artex Trading sa     <jcuello@artextrading.com>
+ * @author Carlos García Gómez  <carlos@facturascripts.com>
+
+-->
+<view>
+    <columns>
+        <column name="code" order="100">
+            <widget type="text" fieldname="id"/>            
+        </column>
+        <column name="registration" order="110">
+            <widget type="date" fieldname="registration" />
+        </column>
+        <column name="amount" order="120">
+            <widget type="money" fieldname="amount" atrib="money"/>
+        </column> 
+        <column name="tithetype" order="130">
+            <widget type="select" fieldname="tithetype" translate="true">                
+                <values title="tithe">1</values>
+                <values title="offering">2</values>
+                <values title="specialdonation">3</values>                    
+            </widget>
+        </column> 
+        <column name="tithename" order="140">
+                <widget type="text" fieldname="tithename"/>
+        </column>
+        <column name="paymentmethod" order="150">
+            <widget type="select" fieldname="paymentmethod" translate="true">                
+                    <values title="cash">1</values>
+                    <values title="transfer">2</values>
+                    <values title="card">3</values>                    
+                </widget>
+        </column> 
+         <column name="members" title="donor" order="160">
+            <widget type="text" fieldname="member"/>    
+        </column>
+        <column name="fiscal-number" order="160">
+            <widget type="text" fieldname="cifnif"/>    
+        </column>
+
+    </columns>
+
+
+</view>

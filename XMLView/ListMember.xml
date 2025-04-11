@@ -50,5 +50,16 @@
             </widget>
         </column>
     </columns>
-
+    <modals>
+        <group name="add-group" title="conectiongroup">
+           <column name="code" order="100" display="none">
+               <widget type="text" fieldname="id" />
+           </column>
+            <column name="conectiongroup" order="110" numcolumns="12">
+                <widget type="autocomplete" fieldname="idconectiongroup" required="true">
+                    <values source="conection_groups" fieldcode="id" fieldtitle="name" />
+                </widget>
+            </column>
+        </group>
+    </modals>
 </view>
