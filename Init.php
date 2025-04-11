@@ -1,6 +1,6 @@
 <?php
 
-namespace FacturaScripts\Plugins\WoocommerceSync;
+namespace FacturaScripts\Plugins\PruebaPlugin;
 
 use FacturaScripts\Core\Template\InitClass;
 
