@@ -28,7 +28,7 @@ use FacturaScripts\Core\Tools;
  *
  * @author Dainier Rojas Jiménez  <danredjim@gmail.com>
  */
-class Member extends ModelClass
+class Member extends ModelClass 
 {
 
     use ModelTrait;
@@ -72,6 +72,11 @@ class Member extends ModelClass
     public $baptism;
 
     /**
+     *
+     * @var string
+     */
+    public $baptismsite;
+    /**
      * 
      * @var string
      */
@@ -98,6 +103,21 @@ class Member extends ModelClass
      * @var int
      */
     public $idministry;
+
+    /**
+     * Tax identifier of the customer.
+     *
+     * @var string
+     */
+    public $cifnif;
+    
+    /**
+     * Type of tax identification of the client.
+     * Examples: CIF, NIF, CUIT ...
+     *
+     * @var string
+     */
+    public $tipoidfiscal;
 
     /**
      * 

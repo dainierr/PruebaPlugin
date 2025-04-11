@@ -22,12 +22,13 @@ use FacturaScripts\Core\Model\Base\ModelClass;
 use FacturaScripts\Core\Model\Base\ModelTrait;
 use FacturaScripts\Core\Tools;
 
+
 /**
  * Class that manages the data model of the forecast of suppliers.
  *
  * @author Dainier Rojas Jiménez  <danredjim@gmail.com>
  */
-class Event extends ModelClass
+class ConectionGroup extends ModelClass
 {
 
     use ModelTrait;
@@ -36,39 +37,37 @@ class Event extends ModelClass
     public $id;
 
     /**
-     * Event name.
+     * GrupoConexion name.
      *
      * @var string
      */
     public $name;
 
         /**
-     * Event type.
+     * GrupoConexion numeromiembros.
      *
      * @var int
      */
-    public $eventype;
-
-    /**
-     * Event capacity.
-     *
-     * @var int
-     */
-    public $capacidad;
+    public $membernumbers;
 
         /**
-     * Payment due date.
+     * GrupoConexion diasemana.
      *
      * @var int
      */
-    public $ubicacion;
+    public $weekdays;
+
+    /** @var string */
+    public $hour;
 
         /**
-     * Payment due date.
+     * GrupoConexion idmember.
      *
      * @var int
      */
-    public $presupuesto;
+    public $idmember;
+
+
 
 
     /**
@@ -88,7 +87,7 @@ class Event extends ModelClass
      */
     public static function tableName(): string
     {
-        return 'events';
+        return 'conection_groups';
     }
 
     /**
@@ -103,4 +102,5 @@ class Event extends ModelClass
 
         return parent::test();
     }
+
 }

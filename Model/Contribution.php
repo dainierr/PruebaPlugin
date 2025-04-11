@@ -20,56 +20,90 @@ namespace FacturaScripts\Plugins\PruebaPlugin\Model;
 
 use FacturaScripts\Core\Model\Base\ModelClass;
 use FacturaScripts\Core\Model\Base\ModelTrait;
+use FacturaScripts\Core\Session;
 use FacturaScripts\Core\Tools;
+
 
 /**
  * Class that manages the data model of the forecast of suppliers.
  *
  * @author Dainier Rojas Jiménez  <danredjim@gmail.com>
  */
-class Event extends ModelClass
+class Contribution extends ModelClass
 {
 
     use ModelTrait;
 
+    public const TITHE_DIEZMO = 1;
+    public const TITHE_OFRENDA = 2;
+    public const TITHE_ESPECIAL = 3;
+
+    public const PAYMENT_EFECTIVO = 1;
+    public const PAYMENT_TRANSFERENCIA = 2;
+    public const PAYMENT_TARJETA = 3;
+
     /** Primary Key of the model @var int */
     public $id;
 
+
+
     /**
-     * Event name.
-     *
+     *Contributions registration
      * @var string
      */
-    public $name;
-
-        /**
-     * Event type.
-     *
-     * @var int
-     */
-    public $eventype;
+    public $registration;
 
     /**
-     * Event capacity.
+     *Contributions  amount.
      *
      * @var int
      */
-    public $capacidad;
+    public $amount;
+
+
+   /**
+     * Contributions tithetype.
+     *
+     * @var int
+     */
+    public $tithetype;
+
+    /**
+     *Contributions paymentmethod.
+     *
+     * @var int
+     */
+    public $paymentmethod;
+
+    /**
+     * Contributions idmember.
+     *
+     * @var int
+     */
+    public $idmember;
 
         /**
-     * Payment due date.
-     *
-     * @var int
+     *Contributions tithename
+     * @var string
      */
-    public $ubicacion;
-
-        /**
-     * Payment due date.
-     *
-     * @var int
+    public $tithename;
+    /**
+     * 
      */
-    public $presupuesto;
+    public $nick;
 
+    /**
+     * 
+     */
+    public function clear()
+    {
+        parent::clear();
+        $this->registration = date(self::DATE_STYLE);
+        $this->amount = 0;
+        $this->tithetype = self::TITHE_DIEZMO;
+        $this->paymentmethod = self::PAYMENT_TRANSFERENCIA;   
+        $this->nick = Session::user()->nick;   
+    }
 
     /**
      * Returns the name of the column that is the model's primary key.
@@ -88,7 +122,7 @@ class Event extends ModelClass
      */
     public static function tableName(): string
     {
-        return 'events';
+        return 'contributions';
     }
 
     /**
@@ -98,9 +132,25 @@ class Event extends ModelClass
      * @return bool
      */
     public function test(): bool
-    {
-        $this->name = Tools::noHtml($this->name);
+    {   
+        if($this->amount <= 0){
+            Tools::log()->error('import-error');
+            return false;
+        }
+        if($this->tithetype == self::TITHE_ESPECIAL && empty($this->tithename)){
+            Tools::log()->error('tithename-required');
+            return false;
+        }
+        if(false === empty($this->idmember)){
+            $member= new Member();
+            $member->loadFromCode($this->idmember);
+            if(empty($member->cifnif)){
+                Tools::log()->error('cif-required');
+                 return false;
+            }
+        }
 
         return parent::test();
     }
+
 }
