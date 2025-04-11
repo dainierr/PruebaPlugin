@@ -21,31 +21,20 @@
 -->
 <view>
     <columns>
-        <group name="defaultministry" numcolumns="12" title="data" icon="fa-solid fa-card">
-            <column name="code" order="100" numcolumns="3">
+            <column name="code" order="100" numcolumns="4" display="none">  
                 <widget type="text" fieldname="id" readonly="true"/>
             </column>
-            <column name="name" order="110" numcolumns="3">
-                <widget type="text" fieldname="name" />
+            <column name="conectiongroup" order="110" numcolumns="4">
+                <widget type="autocomplete" fieldname="idconectiongroup" required="true">
+                    <values source="conection_groups" fieldcode="id" fieldtitle="name" />
+                </widget>
             </column>
-            <column name="phone" order="120" numcolumns="2">
-                <widget type="text" fieldname="phone" required="true" icon="fa-solid fa-phone" maxlength="9"/>
-            </column> 
-            <column name="dischargedate" order="120" numcolumns="2">
-                <widget type="date" fieldname="dischargedate" icon="fa-solid fa-calendar"/>
-            </column>
-            <column name="member" order="130" numcolumns="2">
-                <widget type="select" fieldname="idmember" required="true">
+            <column name="members" order="120" numcolumns="4">
+                <widget type="autocomplete" fieldname="idmember" required="true">
                     <values source="members" fieldcode="id" fieldtitle="name" />
                 </widget>
             </column>
 
-        </group>
-        <group name="notes" numcolumns="12">
-            <column name="notes" order="120" numcolumns="12">
-                <widget type="textarea" fieldname="comments" rows="5"/>
-            </column>
-        </group>    
 
     </columns>
 

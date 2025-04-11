@@ -54,21 +54,36 @@
                 <widget type="text" fieldname="email" icon="fa-solid fa-envelope"/>
             </column>
 
+            <column name="fiscal-id" titleurl="EditSettings?activetab=EditIdentificadorFiscal" numcolumns="6"
+                    order="170">
+                <widget type="select" fieldname="tipoidfiscal" required="true">
+                    <values source="idsfiscales" fieldcode="tipoidfiscal" fieldtitle="tipoidfiscal"/>
+                </widget>
+            </column>
+            <column name="fiscal-number" numcolumns="6" order="180">
+                <widget type="text" fieldname="cifnif" maxlength="30" icon="fa-solid fa-id-card"/>
+            </column>
+
         </group>
         <group name="default2" numcolumns="4" title="important-date" icon="fa-solid fa-clock">
-            <column name="baptism" order="100" numcolumns="12">
+            <column name="baptism" order="100" numcolumns="6">
                 <widget type="date" fieldname="baptism" icon="fa-solid fa-calendar"/>
             </column>
-            <column name="birth-date" order="110" numcolumns="12">
+            <column name="birth-date" order="110" numcolumns="6">
                 <widget type="date" fieldname="birthdate" icon="fa-solid fa-calendar"/>
-            </column>            
-        </group>  
-        <group name="notes" numcolumns="12">
-            <column name="notes" order="100" numcolumns="12">
-                <widget type="textarea" fieldname="notes" rows="5"/>
+            </column>    
+            <column name="baptism-site" order="120" numcolumns="12">
+                <widget type="text" fieldname="baptismsite"/>
             </column>
-        </group>        
+        
+        </group>  
+   
        
     </columns>
+    <rows>
+        <row type="statistics">
+            <datalabel color="warning" icon="fa-solid fa-table-list" label="constrib-total" function="calcTotalDistribution"/>
+        </row>
+    </rows>
 
 </view>
