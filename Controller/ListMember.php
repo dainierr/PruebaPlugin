@@ -8,8 +8,12 @@
  */
 namespace FacturaScripts\Plugins\PruebaPlugin\Controller;
 
+use FacturaScripts\Core\Base\DataBase\DataBaseWhere;
 use FacturaScripts\Core\Lib\ExtendedController\ListController;
 use FacturaScripts\Core\Tools;
+use FacturaScripts\Dinamic\Model\ConectionGroupMember;
+use FacturaScripts\Dinamic\Model\Member;
+use FacturaScripts\Dinamic\Model\Visitor;
 use FacturaScripts\Plugins\PrevisionPagos\Lib\PrevisionPagos\ForecastSupplierReport;
 
 /**
@@ -49,18 +53,41 @@ class ListMember extends ListController
        
     }
 
+    protected function execPreviousAction($action)
+    {
+        switch ($action){
+            case 'add-group':
+                $this->addGroupAction();
+                return true;
+            case 'convert-to-member':
+                $this->convertToMember();
+                return true;
+
+            default :
+                return parent::execPreviousAction($action);  
+        }
+    }
+
     /**
      * Add and configure absence concept view
      *
      * @param string $viewName
      */
-    private function createViewMembers($viewName = self::VIEW_MEMBER)
+    private function createViewMembers($viewName = self::VIEW_MEMBER):void
     {
         $this->addView($viewName, 'Member', 'members', 'fa-solid fa-user-groupy');
         $this->addSearchFields($viewName, ['name', 'id', 'surname']);
 
         $this->addOrderBy($viewName, ['id'], 'code');
-        $this->addOrderBy($viewName, ['name', 'surname'], 'name', 1);   
+        $this->addOrderBy($viewName, ['name', 'surname'], 'name', 1); 
+        $this->addButton($viewName, [
+            'action' => 'add-group',
+            'icon' => 'fa-solid fa-masks-theater',
+            'label' => 'conectiongroup',
+            'type' => 'modal',
+            'color' => 'primary',
+        ]);  
+        
             
         
     }
@@ -70,14 +97,98 @@ class ListMember extends ListController
      *
      * @param string $viewName
      */
-    private function createViewVisitors($viewName = self::VIEW_EVENT)
+    private function createViewVisitors($viewName = self::VIEW_EVENT):void
     {
         $this->addView($viewName, 'Visitor', 'visitors', 'fa-solid fa-masks-theater');
         $this->addSearchFields($viewName, ['name', 'id', 'phone']);
 
         $this->addOrderBy($viewName, ['id'], 'code', 2);
-        $this->addOrderBy($viewName, ['name'], 'name', 1);           
+        $this->addOrderBy($viewName, ['name'], 'name', 1);  
+        
+        $this->addButton($viewName, [
+            'action' => 'convert-to-member',
+            'icon' => 'fa-solid fa-masks-theater',
+            'label' => 'members',
+            'type' => 'action',
+            'color' => 'primary',
+        ]); 
         
     }
+
+    /**
+     * 
+     */
+    private function addGroupAction():void
+    {
+        if(false === $this->validateFormToken()){
+            return;
+        }
+        $data=$this->request->request->all();
+        if(empty($data['code'])){
+            Tools::log()->warning('no-code-list');
+            return;
+        }
+
+        $idconectiongroup = (int)$data['idconectiongroup'] ?? 0;
+        if(empty($idconectiongroup)){
+            Tools::log()->warning('no-idconectiongroup');
+            return;
+        }
+
+        $count = $total = 0;
+        foreach(explode(',',$data['code']) as $idmember){
+            $total++;
+            $where = [ 
+                new DataBaseWhere('idconectiongroup', $idconectiongroup),
+                new DataBaseWhere('idmember', $idmember)
+            ];            
+
+            $conectiongmember= new ConectionGroupMember();
+            if(false===$conectiongmember->loadFromCode('', $where)){
+                $conectiongmember->idconectiongroup = $data['idconectiongroup'];
+                $conectiongmember->idmember = $idmember;
+                $conectiongmember->save();
+                $count++;   
+            }
+           
+        }
+
+        Tools::log()->info(
+            'add-member-conection', ['%count%'=>$count,'%total%'=>$total]
+        );
+
+    }
+    private function convertToMember():void
+    {
+        $data=$this->request->request->all();
+
+        if(empty($data['codes'])){
+            Tools::log()->warning('no-code-list');
+            return;
+        }
+        
+        foreach($data['codes'] as $idvisitor){
+            $visitor = new Visitor();
+            $visitor->loadFromCode($idvisitor);
+            $where = [                 
+                new DataBaseWhere('name', $visitor->name)
+            ];   
+
+            $member= new Member();
+            if(false===$member->loadFromCode('', $where)){
+                $member->name = $visitor->name;
+                $member->surname = '-';
+                $member->save();
+                Tools::log()->notice('record-updated-correctly');
+                 
+            }else{
+                Tools::log()->warning('ya existe');
+                 return;
+            }
+
+
+        }
+    }
+    
 
 }

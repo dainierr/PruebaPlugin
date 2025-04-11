@@ -17,10 +17,10 @@ use FacturaScripts\Plugins\PrevisionPagos\Lib\PrevisionPagos\ForecastSupplierRep
  *
  * @author Jose Antonio Cuello Principal <yopli2000@gmail.com>
  */
-class ListMinistry extends ListController
+class ListConectionGroup extends ListController
 {
 
-    private const VIEW_EVENT = 'ListMinistry';
+    private const VIEW_CONECTION_GROUP = 'ListConectionGroup';
 
     /**
      * Returns basic page attributes
@@ -30,8 +30,8 @@ class ListMinistry extends ListController
     public function getPageData(): array
     {
         $pagedata = parent::getPageData();
-        $pagedata['title'] = 'ministry';
-        $pagedata['icon'] = 'fa-solid fa-hands-holding';
+        $pagedata['title'] = 'conectiongroup';
+        $pagedata['icon'] = 'fa-solid fa-people-group';
         $pagedata['menu'] = 'test';
         $pagedata['ordernum'] = 0;
 
@@ -52,9 +52,9 @@ class ListMinistry extends ListController
      *
      * @param string $viewName
      */
-    private function createViewMembers($viewName = self::VIEW_EVENT)
+    private function createViewMembers($viewName = self::VIEW_CONECTION_GROUP)
     {
-        $this->addView($viewName, 'Ministry', 'ministry', 'fa-solid fa-masks-theater');
+        $this->addView($viewName, 'ConectionGroup', 'conectiongroup', 'fa-solid fa-masks-theater');
         $this->addSearchFields($viewName, ['name', 'id']);
 
         $this->addOrderBy($viewName, ['id'], 'code');

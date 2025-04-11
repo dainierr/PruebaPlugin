@@ -17,10 +17,10 @@ use FacturaScripts\Plugins\PrevisionPagos\Lib\PrevisionPagos\ForecastSupplierRep
  *
  * @author Jose Antonio Cuello Principal <yopli2000@gmail.com>
  */
-class ListMinistry extends ListController
+class ListContribution extends ListController
 {
 
-    private const VIEW_EVENT = 'ListMinistry';
+    private const VIEW_CONTRIBUTION = 'ListContribution';
 
     /**
      * Returns basic page attributes
@@ -30,8 +30,8 @@ class ListMinistry extends ListController
     public function getPageData(): array
     {
         $pagedata = parent::getPageData();
-        $pagedata['title'] = 'ministry';
-        $pagedata['icon'] = 'fa-solid fa-hands-holding';
+        $pagedata['title'] = 'contribution';
+        $pagedata['icon'] = 'fa-solid fa-sack-dollar';
         $pagedata['menu'] = 'test';
         $pagedata['ordernum'] = 0;
 
@@ -43,7 +43,7 @@ class ListMinistry extends ListController
      */
     protected function createViews()
     {
-        $this->createViewMembers();
+        $this->createViewContributions();
        
     }
 
@@ -52,13 +52,13 @@ class ListMinistry extends ListController
      *
      * @param string $viewName
      */
-    private function createViewMembers($viewName = self::VIEW_EVENT)
+    private function createViewContributions($viewName = self::VIEW_CONTRIBUTION)
     {
-        $this->addView($viewName, 'Ministry', 'ministry', 'fa-solid fa-masks-theater');
+        $this->addView($viewName, 'Join\Contribution', 'contribution', 'fa-solid fa-masks-theater');
         $this->addSearchFields($viewName, ['name', 'id']);
 
         $this->addOrderBy($viewName, ['id'], 'code');
-        $this->addOrderBy($viewName, ['name'], 'name', 1);   
+         
         
         
     }
